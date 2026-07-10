@@ -1,0 +1,209 @@
+@import 'tailwindcss';
+
+@import 'tw-animate-css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-sans:
+        'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary-emphasis: var(--primary-emphasis);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-destructive-emphasis: var(--destructive-emphasis);
+
+    --color-success: var(--success);
+
+    --color-brand-navy: var(--brand-navy);
+    --color-brand-navy-foreground: var(--brand-navy-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+    --radius: 0.5rem;
+
+    /* Canvas carries a clear cool tint so crisp white panels read as elevated,
+       not as one flat sheet of grey. */
+    --background: oklch(0.972 0.009 256);
+    --foreground: oklch(0.2 0.03 264);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.2 0.03 264);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.2 0.03 264);
+
+    /* Rows blue, pushed to a sharper, more saturated action color (AA on white). */
+    --primary: oklch(0.55 0.19 256);
+    --primary-foreground: oklch(0.985 0.005 256);
+    /* Primary used as text/icon (not a fill). Same as primary in light; lifted in
+       dark so brand-blue labels clear AA as foreground. */
+    --primary-emphasis: oklch(0.55 0.19 256);
+    --secondary: oklch(0.948 0.008 256);
+    --secondary-foreground: oklch(0.27 0.025 264);
+    --muted: oklch(0.952 0.008 256);
+    --muted-foreground: oklch(0.44 0.028 264);
+    --accent: oklch(0.93 0.018 256);
+    --accent-foreground: oklch(0.27 0.03 264);
+    /* `--destructive` is the text/icon role (AA as foreground); `--destructive-emphasis`
+       is the filled-button surface that carries white text at AA. In light they coincide. */
+    --destructive: oklch(0.56 0.21 27);
+    --destructive-emphasis: oklch(0.56 0.21 27);
+    --destructive-foreground: oklch(0.985 0 0);
+    /* Success: a calm green, tuned for AA on the light canvas. State only. */
+    --success: oklch(0.52 0.13 150);
+    --border: oklch(0.885 0.012 256);
+    --input: oklch(0.885 0.012 256);
+    --ring: oklch(0.55 0.19 256);
+
+    /* Brand-anchored chart ramp: blue → navy → sky → amber → violet. */
+    --chart-1: oklch(0.55 0.19 256);
+    --chart-2: oklch(0.42 0.09 256);
+    --chart-3: oklch(0.7 0.13 236);
+    --chart-4: oklch(0.76 0.15 75);
+    --chart-5: oklch(0.6 0.16 292);
+
+    /* Nav rail: committed brand navy in light mode — a confident dark rail
+       against the light canvas, not a near-white neutral. */
+    --sidebar: oklch(0.22 0.04 262);
+    --sidebar-foreground: oklch(0.9 0.014 256);
+    --sidebar-primary: oklch(0.65 0.18 256);
+    --sidebar-primary-foreground: oklch(0.99 0.005 256);
+    --sidebar-accent: oklch(0.3 0.045 262);
+    --sidebar-accent-foreground: oklch(0.97 0.01 256);
+    --sidebar-border: oklch(0.3 0.04 262);
+    --sidebar-ring: oklch(0.65 0.18 256);
+
+    /* Deep navy — the brand anchor surface (auth panel, dark canvas). */
+    --brand-navy: oklch(0.17 0.025 258);
+    --brand-navy-foreground: oklch(0.96 0.008 256);
+
+    /* Motion + elevation tokens. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow-overlay:
+        0 1px 2px -1px oklch(0.2 0.04 262 / 0.16),
+        0 10px 28px -8px oklch(0.2 0.04 262 / 0.22);
+}
+
+.dark {
+    /* Navy-grounded: deep-navy canvas, raised navy panels, deeper rail. */
+    --background: oklch(0.17 0.025 258);
+    --foreground: oklch(0.96 0.008 256);
+    --card: oklch(0.21 0.025 258);
+    --card-foreground: oklch(0.96 0.008 256);
+    --popover: oklch(0.21 0.025 258);
+    --popover-foreground: oklch(0.96 0.008 256);
+    --primary: oklch(0.58 0.19 256);
+    --primary-foreground: oklch(0.985 0.005 256);
+    --primary-emphasis: oklch(0.72 0.16 256);
+    --secondary: oklch(0.26 0.022 258);
+    --secondary-foreground: oklch(0.96 0.008 256);
+    --muted: oklch(0.25 0.02 258);
+    --muted-foreground: oklch(0.72 0.02 256);
+    --accent: oklch(0.28 0.025 258);
+    --accent-foreground: oklch(0.96 0.008 256);
+    /* Dark: split the roles. Text/icon destructive is lighter for AA as foreground;
+       the button fill stays darker so its white label clears AA. */
+    --destructive: oklch(0.66 0.17 25);
+    --destructive-emphasis: oklch(0.52 0.21 27);
+    --destructive-foreground: oklch(0.985 0 0);
+    --success: oklch(0.72 0.15 152);
+    --border: oklch(0.29 0.02 258);
+    --input: oklch(0.31 0.02 258);
+    --ring: oklch(0.62 0.17 256);
+
+    --chart-1: oklch(0.65 0.16 256);
+    --chart-2: oklch(0.6 0.09 256);
+    --chart-3: oklch(0.75 0.13 236);
+    --chart-4: oklch(0.8 0.14 75);
+    --chart-5: oklch(0.68 0.15 292);
+
+    --sidebar: oklch(0.14 0.025 258);
+    --sidebar-foreground: oklch(0.96 0.008 256);
+    --sidebar-primary: oklch(0.62 0.17 256);
+    --sidebar-primary-foreground: oklch(0.985 0.005 256);
+    --sidebar-accent: oklch(0.24 0.025 258);
+    --sidebar-accent-foreground: oklch(0.96 0.008 256);
+    --sidebar-border: oklch(0.26 0.02 258);
+    --sidebar-ring: oklch(0.62 0.17 256);
+
+    --shadow-overlay:
+        0 1px 2px -1px oklch(0 0 0 / 0.4), 0 10px 28px -10px oklch(0 0 0 / 0.55);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: 'cv11', 'ss01';
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Tabular figures wherever numbers are compared/aligned. */
+    table,
+    [data-tabular] {
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Reduced motion is not optional. */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}
